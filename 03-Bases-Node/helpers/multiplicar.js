@@ -27,7 +27,7 @@ const crearArchivoTabla = async (base, listado, hasta) =>{
             salida += `${base}`.italic.magenta + ` * `.red + `${index}`.italic.grey+ ` = `.green+ `${base * index}\n`.red.bold;
             consola += `${base} * ${index} = ${base * index}\n`;
         }
-        fs.writeFileSync(`./salida/tabla-${base}`, consola);
+        fs.writeFileSync(`./salida/tabla-${base}.txt`, consola);
         if(listado){
             console.log('=============='.italic.blue);
             console.log(` Tabla del ${base}`.cyan);
