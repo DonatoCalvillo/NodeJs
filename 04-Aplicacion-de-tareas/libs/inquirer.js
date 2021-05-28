@@ -42,14 +42,22 @@ const preguntas = [
 const inquireMenu = async() =>{
     console.clear();
     console.log('==========================='.green);
-    console.log('  Selecciones una opcion'.green);
+    console.log('  Selecciones una opcion'.white);
     console.log('===========================\n'.green);
 
+    /*Para la libreria inquirer se requiere de un tipo de fragmento
+    con el que el usuario va a interactuar, en este caso la lista,
+    pero puede ser un input, checkbox, etc en donde le tendremos que mandar
+    la 'pregunta' de forma await para esperar la respuesta y desestructurarla
+    por su nombre en este caso 'ocpion'*/
     const {opcion} = await inquirer.prompt(preguntas);
     return opcion;
 }
 
 const pausa = async () =>{
+    /*Aqui hacemos lo mismo como es una funcion async nos quedamos dentro esperando una
+    respuesta de la funcion, generamos nuestra 'pregunta' que en este caso es un input
+    y retornamos el input para continuar */
     const question = [
         {
             type: 'input',
@@ -61,7 +69,32 @@ const pausa = async () =>{
     return await inquirer.prompt(question);
 }
 
+const leerInput = async (message) => {
+    /*Como se va a reciclar mucho esta funcion recibimos de parametro
+    el mensaje que se va a imprimir en consola para que detecte el input
+    como 'Ingrese la tarea: ' o 'Escriba el id de la tarea a borrar' son 
+    los textos que valdria message, y como message : message es redundante
+    y solo se pone message*/
+    const question = [
+        {
+            type: 'inout',
+            name: 'descripcion',
+            message,
+            validate(value){
+                if(value.lenght === 0){
+                    return 'Porfavor ingrese un valor';
+                }
+                return true;
+            }
+        }
+    ];
+    //Retornamos lo que el usuario escribio
+    const {descripcion} = await inquirer.prompt(question); 
+    return descripcion;
+}
+
 module.exports = {
     inquireMenu,
-    pausa
+    pausa,
+    leerInput
 }
