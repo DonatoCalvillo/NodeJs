@@ -6,7 +6,8 @@ const { inquireMenu,
     pausa,
     leerInput,
     listadoTareasBorrar,
-    confirmar
+    confirmar,
+    listadoSeleccionarTareas
 } = require('./libs/inquirer');
 const Tareas = require('./models/tareas');
 const { guardarDB, leerDB } = require('./libs/guardarArchivo');
@@ -45,6 +46,9 @@ const main = async () => {
                 break;
             case '4':
                 tareas.listaCompletadas(false);    
+                break;
+            case '5':
+                await listadoSeleccionarTareas(tareas.listadoTareas);    
                 break;
             case '6':
                 const id = await listadoTareasBorrar(tareas.listadoTareas);  
