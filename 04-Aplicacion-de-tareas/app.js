@@ -48,7 +48,8 @@ const main = async () => {
                 tareas.listaCompletadas(false);    
                 break;
             case '5':
-                await listadoSeleccionarTareas(tareas.listadoTareas);    
+                const ids = await listadoSeleccionarTareas(tareas.listadoTareas);  
+                tareas.toggleTarea(ids);
                 break;
             case '6':
                 const id = await listadoTareasBorrar(tareas.listadoTareas);  

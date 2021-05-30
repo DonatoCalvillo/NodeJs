@@ -135,7 +135,7 @@ const listadoSeleccionarTareas = async(tareas = []) =>{
     const question = [
         {
             type: 'checkbox',
-            name: 'id',
+            name: 'ids',
             message : 'Selecciones',
             choices
         }
