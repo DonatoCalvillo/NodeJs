@@ -20,19 +20,29 @@ const main = async () => {
                 const id = await listarLugares(lugares);
                 if ( id === '0' ) continue;
                 const lugarSelec = lugares.find( l => l.id === id);
+
+                //Agregamos al historial
+                busquedas.agregarHistorial( lugarSelec.nombre);
+
                 //Clima
-                
+                const clima = await busquedas.climaLugar(lugarSelec.lat,lugarSelec.lng);
                 //Mostrar resultados
                 console.clear();
                 console.log('\nInformacion de la ciudad\n'.green);
                 console.log('Ciudad'.bold, lugarSelec.nombre);
                 console.log('Lat'.bold, lugarSelec.lat);
                 console.log('Lng'.bold, lugarSelec.lng);
-                console.log('Temperatura'.bold,);
-                console.log('Minima'.bold,);
-                console.log('Maxima'.bold,);
+                console.log('Temperatura'.bold,clima.temp);
+                console.log('Minima'.bold,clima.min);
+                console.log('Maxima'.bold,clima.max);
+                console.log('Como esta el clima: '.bold,`${clima.desc}`.green);
                 break;
-        
+            case 2:
+                busquedas.historialCapitalizado.forEach( (lugar, i) => {
+                    const idx = `${i + 1}.`.green;
+                    console.log(`${idx} ${lugar}`)
+                })
+                break;
             default:
                 break;
         }
